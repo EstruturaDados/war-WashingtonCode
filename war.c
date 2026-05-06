@@ -15,3 +15,9 @@ typedef struct {
     char corExercito[10];
     int qtdTropas;
 } Territorio;
+
+// Protótipos das funções
+void cadastrarTerritorios(Territorio* mapa, int quantidade);
+void exibirMapa(Territorio* mapa, int quantidade);
+void atacar(Territorio* atacante, Territorio* defensor);
+void liberarMemoria(Territorio* mapa);
