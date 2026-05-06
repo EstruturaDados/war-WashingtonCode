@@ -21,3 +21,61 @@ void cadastrarTerritorios(Territorio* mapa, int quantidade);
 void exibirMapa(Territorio* mapa, int quantidade);
 void atacar(Territorio* atacante, Territorio* defensor);
 void liberarMemoria(Territorio* mapa);
+
+int main() {
+    int totalTerritorios;
+    int optAtacante, optDefensor;
+
+    // Inicializa o gerador de números aleatórios
+    srand(time(NULL));
+
+    printf("--- Bem-vindo ao WAR Estruturado ---\n");
+    printf("Quantos territorios deseja cadastrar? ");
+    scanf("%d", &totalTerritorios);
+    getchar(); // Limpa o buffer do teclado
+
+    // Alocação Dinâmica usando calloc
+    Territorio* mapa = (Territorio*)calloc(totalTerritorios, sizeof(Territorio));
+
+    if (mapa == NULL) {
+        printf("Erro ao alocar memoria!\n");
+        return 1;
+    }
+
+    // Cadastro inicial
+    cadastrarTerritorios(mapa, totalTerritorios);
+
+    int jogando = 1;
+    while (jogando) {
+        exibirMapa(mapa, totalTerritorios);
+
+        printf("\n--- FASE DE ATAQUE ---\n");
+        printf("Escolha o numero do territorio ATACANTE (1 a %d) ou 0 para sair: ", totalTerritorios);
+        scanf("%d", &optAtacante);
+
+        if (optAtacante == 0) break;
+
+        printf("Escolha o numero do territorio DEFENSOR (1 a %d): ", totalTerritorios);
+        scanf("%d", &optDefensor);
+
+        // Validações de entrada
+        if (optAtacante < 1 || optAtacante > totalTerritorios || optDefensor < 1 || optDefensor > totalTerritorios) {
+            printf("\n[Erro] Territorios invalidos!\n");
+            continue;
+        }
+
+        if (optAtacante == optDefensor) {
+            printf("\n[Erro] Um territorio nao pode atacar a si mesmo!\n");
+            continue;
+        }
+
+        // Executa o ataque passando os endereços via ponteiros
+        atacar(&mapa[optAtacante - 1], &mapa[optDefensor - 1]);
+    }
+
+    // Liberação da memória antes de fechar o programa
+    liberarMemoria(mapa);
+    
+    printf("\nPrograma encerrado. Memoria liberada.\n");
+    return 0;
+}
