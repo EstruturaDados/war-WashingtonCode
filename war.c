@@ -97,3 +97,15 @@ void cadastrarTerritorios(Territorio* mapa, int quantidade) {
         getchar(); // Limpa buffer
     }
 }
+
+// Exibição dos dados
+void exibirMapa(Territorio* mapa, int quantidade) {
+    printf("\n========= MAPA ATUAL =========\n");
+    for (int i = 0; i < quantidade; i++) {
+        printf("[%d] %-15s | Cor: %-10s | Tropas: %d\n", 
+               i + 1, (mapa + i)->nome, (mapa + i)->corExercito, (mapa + i)->qtdTropas);
+    }
+    printf("==============================\n");
+}
+
+
