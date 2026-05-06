@@ -108,4 +108,43 @@ void exibirMapa(Territorio* mapa, int quantidade) {
     printf("==============================\n");
 }
 
+// Lógica de batalha e conquista
+void atacar(Territorio* atacante, Territorio* defensor) {
+    if (strcmp(atacante->corExercito, defensor->corExercito) == 0) {
+        printf("\n[Aviso] Voce nao pode atacar um territorio da mesma cor!\n");
+        return;
+    }
+
+    if (atacante->qtdTropas <= 1) {
+        printf("\n[Aviso] O territorio %s precisa de pelo menos 2 tropas para atacar!\n", atacante->nome);
+        return;
+    }
+
+    printf("\n--- BATALHA: %s vs %s ---\n", atacante->nome, defensor->nome);
+    
+    int dadoAtacante = (rand() % 6) + 1;
+    int dadoDefensor = (rand() % 6) + 1;
+
+    printf("Dado do Atacante: %d | Dado do Defensor: %d\n", dadoAtacante, dadoDefensor);
+
+    if (dadoAtacante > dadoDefensor) {
+        printf("O ATACANTE VENCEU a rodada! O defensor perdeu 1 tropa.\n");
+        defensor->qtdTropas -= 1;
+
+        if (defensor->qtdTropas <= 0) {
+            printf("\n!!! TERRITORIO CONQUISTADO !!!\n");
+            printf("O exercito %s agora domina %s.\n", atacante->corExercito, defensor->nome);
+            
+            strcpy(defensor->corExercito, atacante->corExercito);
+            defensor->qtdTropas = 1; 
+            
+            if (atacante->qtdTropas > 1) {
+                atacante->qtdTropas -= 1;
+            }
+        }
+    } else {
+        printf("O DEFENSOR VENCEU a rodada! O atacante perdeu 1 tropa.\n");
+        atacante->qtdTropas -= 1;
+    }
+}
 
