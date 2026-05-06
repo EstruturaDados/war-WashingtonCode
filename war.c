@@ -148,3 +148,11 @@ void atacar(Territorio* atacante, Territorio* defensor) {
     }
 }
 
+// Liberação de memória 
+void liberarMemoria(Territorio* mapa) {
+    if (mapa != NULL) {
+        free(mapa);
+    }
+}
+
+
