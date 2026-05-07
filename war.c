@@ -94,3 +94,36 @@ int main() {
     liberarMemoria(mapa, missaoTexto);
     return 0;
 }
+
+// --- Implementação das funções ---
+// Função de ataque
+void atacar(Territorio* atacante, Territorio* defensor) {
+    if (atacante->qtdTropas <= 1) {
+        printf("[Aviso] Tropas insuficientes para atacar! (Minimo 2)\n");
+        return;
+    }
+
+    int dadoA = (rand() % 6) + 1;
+    int dadoD = (rand() % 6) + 1;
+
+    // Exibição dos valores dos dados
+    printf("\n--- RESULTADO DOS DADOS ---\n");
+    printf("DADO ATACANTE: [%d]\n", dadoA);
+    printf("DADO DEFENSOR: [%d]\n", dadoD);
+    printf("---------------------------\n");
+
+    if (dadoA > dadoD) {
+        printf("O Atacante venceu a rodada!\n");
+        defensor->qtdTropas--;
+    } else {
+        printf("A Defesa venceu a rodada (ou empate)!\n");
+        atacante->qtdTropas--;
+    }
+
+    if (defensor->qtdTropas <= 0) {
+        printf("!!! TERRITORIO %s CONQUISTADO !!!\n", defensor->nome);
+        strcpy(defensor->corExercito, atacante->corExercito);
+        defensor->qtdTropas = 1;
+        atacante->qtdTropas--;
+    }
+}
