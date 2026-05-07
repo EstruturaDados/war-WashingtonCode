@@ -171,3 +171,12 @@ void cadastrarTerritorios(Territorio* mapa, int quantidade) {
         getchar();
     }
 }
+
+// Função de exibição do mapa
+void exibirMapa(Territorio* mapa, int quantidade) {
+    printf("\n========= STATUS DO MAPA =========\n");
+    for (int i = 0; i < quantidade; i++) {
+        printf("[%d] %-12s | Cor: %-8s | Tropas: %d\n", i+1, mapa[i].nome, mapa[i].corExercito, mapa[i].qtdTropas);
+    }
+    printf("==================================\n");
+}
