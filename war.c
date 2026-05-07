@@ -8,3 +8,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+// Estrutura do Território
+typedef struct {
+    char nome[30];
+    char corExercito[10];
+    int qtdTropas;
+} Territorio;
+
