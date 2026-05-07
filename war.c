@@ -180,3 +180,9 @@ void exibirMapa(Territorio* mapa, int quantidade) {
     }
     printf("==================================\n");
 }
+
+// Função de liberação de memória
+void liberarMemoria(Territorio* mapa, char* missao) {
+    free(mapa);
+    free(missao);
+}
