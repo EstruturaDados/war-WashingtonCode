@@ -127,3 +127,21 @@ void atacar(Territorio* atacante, Territorio* defensor) {
         atacante->qtdTropas--;
     }
 }
+
+// Função de atribuição de missão
+void atribuirMissao(char* descMissao, int* idMissao, int totalT, Territorio* mapa, char* corAlvo, char* corJogador) {
+    int tentativas = 0, alvoIdx;
+    do {
+        *idMissao = rand() % 5; 
+        alvoIdx = *idMissao;
+        tentativas++;
+    } while (totalT > alvoIdx && strcmp(mapa[alvoIdx].corExercito, corJogador) == 0 && tentativas < 10);
+
+    if (totalT > alvoIdx) {
+        strcpy(corAlvo, mapa[alvoIdx].corExercito);
+        sprintf(descMissao, "Eliminar o exercito da cor %s (iniciado no Territorio %d).", corAlvo, alvoIdx + 1);
+    } else {
+        *idMissao = 99;
+        strcpy(descMissao, "OBJETIVO: Conquistar 3 territorios quaisquer.");
+    }
+}
