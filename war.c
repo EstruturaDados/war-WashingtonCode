@@ -145,3 +145,14 @@ void atribuirMissao(char* descMissao, int* idMissao, int totalT, Territorio* map
         strcpy(descMissao, "OBJETIVO: Conquistar 3 territorios quaisquer.");
     }
 }
+
+// Função de verificação de missão
+int verificarMissao(int idMissao, char* minhaCor, char* corAlvo, Territorio* mapa, int totalT) {
+    int meusTerritorios = 0, corAlvoAindaExiste = 0;
+    for (int i = 0; i < totalT; i++) {
+        if (strcmp(mapa[i].corExercito, minhaCor) == 0) meusTerritorios++;
+        if (corAlvo[0] != '\0' && strcmp(mapa[i].corExercito, corAlvo) == 0) corAlvoAindaExiste = 1;
+    }
+    if (idMissao == 99) return (meusTerritorios >= 3);
+    return !corAlvoAindaExiste; 
+}
