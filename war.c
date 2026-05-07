@@ -156,3 +156,18 @@ int verificarMissao(int idMissao, char* minhaCor, char* corAlvo, Territorio* map
     if (idMissao == 99) return (meusTerritorios >= 3);
     return !corAlvoAindaExiste; 
 }
+
+// Função de cadastro dos territórios
+void cadastrarTerritorios(Territorio* mapa, int quantidade) {
+    for (int i = 0; i < quantidade; i++) {
+        printf("\nTerritorio %d - Nome: ", i + 1);
+        fgets(mapa[i].nome, 30, stdin);
+        mapa[i].nome[strcspn(mapa[i].nome, "\n")] = 0;
+        printf("Cor do exercito: ");
+        fgets(mapa[i].corExercito, 10, stdin);
+        mapa[i].corExercito[strcspn(mapa[i].corExercito, "\n")] = 0;
+        printf("Qtd Tropas: ");
+        scanf("%d", &mapa[i].qtdTropas);
+        getchar();
+    }
+}
