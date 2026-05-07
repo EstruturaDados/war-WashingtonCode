@@ -16,3 +16,10 @@ typedef struct {
     int qtdTropas;
 } Territorio;
 
+// Protótipos das funções
+void cadastrarTerritorios(Territorio* mapa, int quantidade);
+void exibirMapa(Territorio* mapa, int quantidade);
+void atacar(Territorio* atacante, Territorio* defensor);
+void atribuirMissao(char* descMissao, int* idMissao, int totalT, Territorio* mapa, char* corAlvo, char* corJogador);
+int verificarMissao(int idMissao, char* minhaCor, char* corAlvo, Territorio* mapa, int totalT);
+void liberarMemoria(Territorio* mapa, char* missao);
